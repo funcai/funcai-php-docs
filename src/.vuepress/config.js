@@ -1,5 +1,5 @@
 const { description } = require('../../package')
-
+const path = require("path")
 module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
@@ -79,5 +79,8 @@ module.exports = {
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
-  ]
+  ],
+  chainWebpack: config => {
+    config.resolve.alias.set('@images', path.resolve(__dirname, "../images"))
+  }
 }
