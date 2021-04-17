@@ -1,15 +1,15 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
+# heroImage: https://v1.vuepress.vuejs.org/hero.png
 tagline: 
-actionText: Quick Start →
-actionLink: /guide/
+actionText: Installation →
+actionLink: /guide/installation.md
 features:
-- title: Feature 1 Title
-  details: Feature 1 Description
-- title: Feature 2 Title
-  details: Feature 2 Description
-- title: Feature 3 Title
-  details: Feature 3 Description
+- title: Machine learning in PHP
+  details: FuncAI brings machine learning to your PHP application.
+- title: Easy to use
+  details: No machine learning knowledge is required to use our prebuild applications.
+- title: State of the art technology
+  details: Backed by Tensorflow we provide state of the art machine learning models for PHP.
 footer: Made by FuncAI with ❤️
 ---
