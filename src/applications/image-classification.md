@@ -2,6 +2,8 @@
 Find out what's in an image. Returns the top 5 classes out of a list of 21.825 classes.
 
 ## Example
+<Demo-ImageSelect />
+
 ![An image of a butterfly and 5 matching labels next to it](~@images/php-ai-image-classification.jpg)
 
 Given any image, this application returns the top 5 categories which describe the primary subject of the image.
