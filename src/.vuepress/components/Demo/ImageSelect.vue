@@ -1,8 +1,8 @@
 <template>
   <div class="s-wrapper">
-    <input class="s-imagePicker" type="file" accept="image/jpg,image/png" />
-    <div class="s-previewImage">
-      <img :src="selectedImage" />
+    <input ref="imagePicker" class="s-imagePicker" type="file" accept="image/jpg,image/png" />
+    <div @click="openImagePicker" class="s-previewImage">
+      <img ref="preview" :src="selectedImage" />
     </div>
     <div class="s-sampleImages">
       <img
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+  import Resizer from '../../logic/Resizer'
   export default {
     data() {
       return {
@@ -34,9 +35,28 @@
     created() {
       this.setImage(this.sampleImages[0])
     },
+    mounted() {
+      this.setupImagePicker()
+    },
     methods: {
       setImage(newImage) {
         this.selectedImage = newImage
+      },
+      setupImagePicker() {
+        const reader = new FileReader()
+        const fileInput = this.$refs.imagePicker
+        reader.onload = e => {
+          this.selectedImage = e.target.result
+          Resizer.resize(this.$refs.preview, 256, 256)
+        }
+        fileInput.addEventListener('change', e => {
+          const f = e.target.files[0]
+          reader.readAsDataURL(f)
+        })
+      },
+      openImagePicker() {
+        const fileInput = this.$refs.imagePicker
+        fileInput.click()
       }
     }
   }
@@ -66,7 +86,7 @@
       box-shadow: 0 0 0 2px #3d6eaa;
     }
   }
-  
+
   .s-imagePicker {
     display: none;
   }
