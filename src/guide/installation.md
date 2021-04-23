@@ -16,10 +16,15 @@ This downloads tensorflow to `./tensorflow`.
 
 This downloads the stylization model to `./models`
 
-#### 4. Configure the models folder
-You will need to move the models folder to a permanent location.
-For example, move it to `/var/www/models` on your server. In that case make sure to set the base path accordingly:
+#### 4. Configure folders
+You will need to move the tensorflow and the models folder to a permanent location.
+For example, move it to `/var/www/` on your server. In that case make sure to set the base path accordingly:
 
     \FuncAI\Config::setModelBasePath('/var/www/models');
+    \FuncAI\Config::setLibPath('/var/www/tensorflow/');
 
 You can also move the folder directly into your project and check them into git, but the folder might get quite big (100 Mb up to multiple Gb).
+
+#### 5. Enable FFI
+
+Enable FFI in your php.ini (details on how to do that are in the works)

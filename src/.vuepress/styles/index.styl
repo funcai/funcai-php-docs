@@ -6,3 +6,46 @@
 
 .home .hero img
   max-width 450px!important
+
+.home .hero .action-button
+  box-shadow 0 5px 15px black
+  position relative
+  transform-style: preserve-3d;
+
+.home .hero .action-button::after, .home .hero .action-button::before
+  box-shadow 0 15px 15px 4px $highlightColor
+  content ""
+  display block
+  position absolute
+  top 0
+  right 0
+  bottom 0
+  left 0
+  transform scale(0.7) translateZ(-1px)
+  opacity 0
+  transition opacity 1s linear
+  border-radius: 4px
+
+.home .hero .action-button::before
+  box-shadow 0 0px 15px 4px $highlightColor2
+
+@keyframes pulse {
+  0% {
+    transform scale(0.7) translateZ(-1px)
+  }
+  100% {
+    transform scale(1) translateZ(-1px)
+  }
+}
+
+.home .hero .action-button:hover::after
+  animation pulse 1s ease infinite alternate
+  opacity 1
+
+.home .hero .action-button:hover::before
+  animation pulse 1s ease infinite alternate
+  animation-delay 0.5s
+  opacity 1
+
+.o-spacer
+  height: 50px

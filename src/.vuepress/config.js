@@ -1,5 +1,7 @@
 const { description } = require('../../package')
 const path = require("path")
+const webpack = require('webpack')
+
 module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
@@ -82,5 +84,11 @@ module.exports = {
   ],
   chainWebpack: config => {
     config.resolve.alias.set('@images', path.resolve(__dirname, "../images"))
+    config.plugin('define').use(
+      new webpack.DefinePlugin({
+        API_URL: JSON.stringify(process.env.API_URL || 'http://localhost/api'),
+      })
+    )
+    
   }
 }
