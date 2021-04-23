@@ -52,6 +52,6 @@ export default {
     })
   },
   getURL(url) {
-    return 'http://localhost/api' + url
+    return API_URL + url
   }
 }

@@ -57,12 +57,14 @@
       sampleImages: {
         type: Array,
         required: false,
-        default: [
-          '/images/demo/flower.jpg',
-          '/images/demo/dog.jpg',
-          '/images/demo/car.jpg',
-          '/images/demo/dough.jpg',
-        ],
+        default() {
+          return [
+            '/images/demo/flower.jpg',
+            '/images/demo/dog.jpg',
+            '/images/demo/car.jpg',
+            '/images/demo/dough.jpg',
+          ]
+        },
       },
     },
     data() {
