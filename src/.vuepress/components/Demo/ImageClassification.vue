@@ -2,6 +2,7 @@
   <div class="s-classificationWrapper">
     <Demo-ImageSelect
       :disabled="isLoading"
+      show-try-it
       @imageSelected="imageSelected" />
     <div
       class="s-classList"

@@ -4,6 +4,11 @@
     :class="{
       '-disabled': disabled,
     }">
+    <div
+      v-if="label"
+      class="s-label">
+      {{ label }}
+    </div>
     <input ref="imagePicker" class="s-imagePicker" type="file" accept="image/jpeg,image/png" />
     <div @click="openImagePicker" class="s-previewImage">
       <img ref="preview" :src="selectedImage" />
@@ -16,6 +21,7 @@
       </div>
     </div>
     <div class="s-sampleImages">
+      <div v-if="showTryIt" class="s-tryIt" />
       <img
         v-for="image in sampleImages"
         :key="image"
@@ -38,16 +44,30 @@
         required: false,
         default: false,
       },
-    },
-    data() {
-      return {
-        selectedImage: null,
-        sampleImages: [
+      showTryIt: {
+        type: Boolean,
+        required: false,
+        default: false,
+      },
+      label: {
+        type: String,
+        required: false,
+        default: '',
+      },
+      sampleImages: {
+        type: Array,
+        required: false,
+        default: [
           '/images/demo/flower.jpg',
           '/images/demo/dog.jpg',
           '/images/demo/car.jpg',
           '/images/demo/dough.jpg',
-        ]
+        ],
+      },
+    },
+    data() {
+      return {
+        selectedImage: null,
       }
     },
     mounted() {
@@ -137,7 +157,24 @@
     display: flex;
     flex-direction: row;
     margin: 10px -5px 0 -5px;
+    position: relative;
   }
+  .s-tryIt {
+    position: absolute;
+    background-image: url('/images/try-it.svg');
+    background-repeat: no-repeat;
+    width: 131px;
+    height: 178px;
+    left: -131px;
+    top: -134px;
+  }
+
+  @media screen and (max-width: 1350px) {
+    .s-tryIt {
+      display: none;
+    }
+  }
+
   .s-sampleImage {
     width: 50px;
     height: 50px;
@@ -151,5 +188,12 @@
 
   .s-imagePicker {
     display: none;
+  }
+
+  .s-label {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #545454;
+    font-size: 14px;
   }
 </style>

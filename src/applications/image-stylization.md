@@ -1,10 +1,10 @@
 # Image stylization
 Apply the style of one image to another image.
 
-## Example
-![Mona Lisa and a hand drawn comic character which combined result in a third image of Mona Lisa in the style of the comic character](~@images/php-ai-image-stylization.jpg)
+## Demo
+<Demo-ImageStylization />
 
-Given the image of Mona Lisa and the painting, this application generates an image of Mona Lisa in the style of the painting. 
+Given the image of the flower on the left and painting on the right, this application generates an image of the flower in the style of the painting. 
 
 ## Use it for
  - Enabling your users to create fun modifications of their images
