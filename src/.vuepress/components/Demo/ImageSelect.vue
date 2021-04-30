@@ -74,15 +74,15 @@
     },
     mounted() {
       this.setupImagePicker()
-      this.setImage(this.sampleImages[0])
+      this.setImage(this.sampleImages[0], false)
     },
     methods: {
-      setImage(newImage) {
+      setImage(newImage, userInteraction = true) {
         if(this.disabled) {
           return
         }
         this.selectedImage = newImage
-        this.emitNewImage()
+        this.emitNewImage(userInteraction)
       },
       setupImagePicker() {
         const reader = new FileReader()
@@ -104,7 +104,7 @@
         const fileInput = this.$refs.imagePicker
         fileInput.click()
       },
-      emitNewImage() {
+      emitNewImage(userInteraction) {
         const img = this.$refs.preview
         img.onload = () => {
           let canvas = document.createElement('canvas')
@@ -114,7 +114,7 @@
           ctx.drawImage(img, 0, 0);
           const dataURL = canvas.toDataURL('image/jpeg', 80);
           canvas = null;
-          this.$emit('imageSelected', dataURL)
+          this.$emit('imageSelected', dataURL, userInteraction)
         }
       }
     }
@@ -125,6 +125,11 @@
   .s-wrapper {
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 820px) {
+      align-items: center;
+      margin-bottom: 20px;
+    }
   }
   .s-previewImage {
     width: 230px;
@@ -171,7 +176,13 @@
     top: -134px;
   }
 
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: 1350px) and (min-width: 821px) {
+    .s-tryIt {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 490px) {
     .s-tryIt {
       display: none;
     }

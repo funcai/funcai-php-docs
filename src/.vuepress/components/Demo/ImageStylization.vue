@@ -18,13 +18,18 @@
       @imageSelected="styleSelected" />
     <div
       class="s-output"
+      ref="output"
       :class="{
         '-loading': isLoading,
       }">
       <div
         v-if="isLoading"
         class="s-output__loader">
-        Running prediction...
+        <div>Running prediction...</div>
+        <ProgressBar
+          style="width: 80%"
+          :duration="6"
+          />
       </div>
       <template v-else-if="output">
         <div class="s-label">Output: Stylization</div>
@@ -38,7 +43,9 @@
 
 <script>
 import Api from '../../logic/Api'
+import ProgressBar from '../ProgressBar.vue'
   export default {
+  components: { ProgressBar },
     data() {
       return {
         isLoading: false,
@@ -49,19 +56,28 @@ import Api from '../../logic/Api'
       }
     },
     methods: {
-      imageSelected(base64) {
+      imageSelected(base64, userInteraction) {
         if(this.isLoading) {
           return
         }
         this.image = base64
         this.submit()
+        if(userInteraction) {
+          this.scrollToOutput()
+        }
       },
-      styleSelected(base64) {
+      styleSelected(base64, userInteraction) {
         if(this.isLoading) {
           return
         }
         this.style = base64
         this.submit()
+        if(userInteraction) {
+          this.scrollToOutput()
+        }
+      },
+      scrollToOutput() {
+        this.$refs.output.scrollIntoView({behavior: "smooth", block: "nearest"})
       },
       submit() {
         if(!this.image || !this.style) {
@@ -109,6 +125,10 @@ import Api from '../../logic/Api'
     display: flex;
     flex-direction: row;
     margin-top: 10px;
+
+    @media screen and (max-width: 820px) {
+      flex-direction: column;
+    }
   }
 
   .s-styleSelector {
@@ -129,11 +149,19 @@ import Api from '../../logic/Api'
       justify-content: center;
       align-items: center;
       text-align: center;
+      min-height: 50px;
+      flex-direction: column;
     }
 
     &__image {
       width: 230px;
       height: 230px;
+    }
+
+    @media screen and (max-width: 820px) {
+      align-items: center;
+      margin-bottom: 20px;
+      width: 100%;
     }
   }
   

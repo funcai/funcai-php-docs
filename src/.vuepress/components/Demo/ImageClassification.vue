@@ -12,7 +12,11 @@
       <div
         v-if="isLoading"
         class="s-classList__loader">
-        Running prediction...
+        <div>Running prediction...</div>
+        <ProgressBar
+          style="width: 80%"
+          :duration="15"
+          />
       </div>
       <div
         v-else
@@ -81,6 +85,11 @@ import Api from '../../logic/Api'
     display: flex;
     flex-direction: row;
     margin-top: 10px;
+
+    @media screen and (max-width: 820px) {
+      flex-direction: column;
+      width: 100%;
+    }
   }
 
   .s-classList {
@@ -98,6 +107,8 @@ import Api from '../../logic/Api'
       justify-content: center;
       align-items: center;
       text-align: center;
+      min-height: 70px;
+      flex-direction: column;
     }
 
     &__item {
@@ -107,6 +118,11 @@ import Api from '../../logic/Api'
       margin-bottom: 5px;
       text-overflow: ellipsis;
       overflow-x: hidden;
+    }
+
+    @media screen and (max-width: 820px) {
+      margin-bottom: 20px;
+      width: 100%;
     }
   }
 </style>
