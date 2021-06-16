@@ -125,7 +125,7 @@ import ProgressBar from '../ProgressBar.vue'
       },
       handleServerResponse(res) {
         if(res.status === 'done') {
-          this.output = res.result
+          this.output = parseFloat(res.result)
           this.isLoading = false
         } else if(res.status === 'processing') {
           this.cacheKey = res.key
