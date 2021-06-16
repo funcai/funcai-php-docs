@@ -4,6 +4,7 @@ The following applications are ready to use:
 
  - [Image stylization](/applications/image-stylization.md)
  - [Image classification](/applications/image-classification.md)
+ - [Image similarity](/applications/image-similarity.md)
 
 ::: tip Take our survey
 To vote for new applications or suggest new ones, please: 
