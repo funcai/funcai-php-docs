@@ -68,6 +68,7 @@ module.exports = {
             '',
             'image-stylization',
             'image-classification',
+            'image-similarity',
             'more',
           ]
         }

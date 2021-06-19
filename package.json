@@ -19,6 +19,6 @@
   "dependencies": {
     "node-sass": "^5.0.0",
     "pica": "^6.1.1",
-    "sass-loader": "^10.0.0"
+    "sass-loader": "^10.2.0"
   }
 }

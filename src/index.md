@@ -1,6 +1,5 @@
 ---
 home: true
-# heroImage: https://v1.vuepress.vuejs.org/hero.png
 tagline: Easy state of the art machine learning in PHP
 actionText: Get started →
 actionLink: /guide/
