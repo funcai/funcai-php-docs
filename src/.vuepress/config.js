@@ -57,6 +57,7 @@ module.exports = {
             '',
             'installation',
             'architecture',
+            'train_model'
           ]
         }
       ],
