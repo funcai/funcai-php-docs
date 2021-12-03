@@ -3,15 +3,15 @@ You can train your own models with funcAI-php without installing or even knowing
 
 Try the following example that guides you through the steps and try it out with your own data afterwards.
 
-## Train image classifier
+## Image classifier
 ### Cats and dogs example
  > This installation instruction assumes you have [docker](https://docs.docker.com/get-docker/) installed on your system. 
 
 #### 1. Setup laravel
 
 ```
-git clone
-docker ... composer install
+git clone https://github.com/funcai/funcai-image-classification-sample.git
+composer install
 ./vendor/bin/sail up
 ./vendor/bin/sail shell
 ./vendor/funcai/funcai-php/install.php
@@ -45,13 +45,13 @@ Now the data is preprocessed and ready to be used for training a classifier.
 To now train the classifier run
 ```
 docker run -v $PWD/image_classification/data/image-classification-export:/funcai-php/my-export \
-  -v $PWD/image_classification/models:/funcai-php/models \
+  -v $PWD/storage/models:/funcai-php/models \
   -e data=/funcai-php/my-export \
   -e performance=fast \
   funcai/funcai-train-image-classifier:latest
 ```
 
-#### 5. Try your model
+#### 5. Try model
 Now we can reap the rewards of our previous work. We can finally predict wether a picture is a cat or a dog. To do that,
 we enter the sail shell again and execute the `php artisan images:classify` command:
 ```
@@ -61,7 +61,7 @@ php artisan images:classify
 We now see, that an example dog picture was successfully classified as a dog!
 
 ### Make it your own
-> This part requires that FuncAI-php and docker is installed.
+> This part requires that you completed step 1 of the cats and dogs example.
 #### 1. Preparing the data
 Training with your own data is as easy as with the cats and dogs dataset. The directory where your training images are stored should have the following structure:
    ```
@@ -80,12 +80,12 @@ Have a look at the script at `app/Console/Commands/ExportImage.php`. There are s
 ./vendor/bin/sail shell
 php artisan images:export
 ```
-> If adjusting the script to your needs is challenging feel free to open an issue.
+> If adjusting the script to your needs is challenging feel free to open an issue on [github](https://github.com/funcai/funcai-image-classification-sample).
 #### 3. Train image classifier
 To now train the classifier run
 ```
 docker run -v $PWD/my-data:/funcai-php/my-export \
-  -v $PWD/image_classification/models:/funcai-php/models \
+  -v $PWD/storage/models:/funcai-php/models \
   -e data=/funcai-php/my-export \
   -e performance=fast \
   funcai/funcai-train-image-classifier:latest
@@ -100,16 +100,19 @@ If you cannot decide if fast or precise is the better option for you go with bal
 This is the way to go when time is not your concern and it is only about getting the correct prediction.
 
 #### 4. Use your own classifier
-Have a look at `app/Console/Commands/ClassifyImages.php`, you have to change that script so that it uses your new model instead of the cats and dogs one. When that is done enter the sail shell again and execute the `php artisan images:classify` command:
+Have a look at `app/Console/Commands/ClassifyImages.php`, you have to change that script so that it uses your new model instead of the cats and dogs one. For that, change the task name and performance level to the ones chosen before and adjust the storage path of the image to classify. When that is done enter the sail shell again and execute the `php artisan images:classify` command:
 ```
 ./vendor/bin/sail shell
 php artisan images:classify
 ```
-The output should be a successful classification of your image!
+The output should be a successful classification of *your* image!
 
-## Possible applications
-For what would such an image classifier be useful? Some ideas would be  
-- Automated categorization
-- Checking if image fits to topic
-  > For example on a website built to share receipies one could check if an image actually includes a meal
-- Much more
+![Alt Text](https://media.giphy.com/media/FlWgXEtj5aM5G/giphy.gif)
+
+### Possible applications
+For what would such an image classifier be useful?  
+Some ideas would be:  
+- Automatically put user uploaded images in one of your predefined image categories
+- Detect if an image fits to the topic of your website
+  > For example on a website built to share recipes you could check if an image actually includes a meal
+- Validate that an image is not [NSFW](https://www.urbandictionary.com/define.php?term=NFSW)  
